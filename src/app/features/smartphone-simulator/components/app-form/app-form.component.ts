@@ -42,9 +42,14 @@ export class AppFormComponent {
 
   private _isFormValid() {
     const currentAppList = this.smartphoneSimulatorService.smartphoneApps$.value;
-    const { name, version, contactInfo } = this.formValue;
+    const { id, name, version, contactInfo } = this.formValue;
     this.errors.name = !name ? 'Name is required' : '';
-    if (!this.errors.name && currentAppList.some((item) => item.name.toUpperCase() === name.toUpperCase())) {
+    if (
+      !this.errors.name &&
+      currentAppList.some(
+        (item) => (!this.edit || (this.edit && item.id !== id)) && item.name.toUpperCase() === name.toUpperCase()
+      )
+    ) {
       this.errors.name = currentAppList.some((item) => item.name.toUpperCase() === name.toUpperCase())
         ? 'Name is already in the list'
         : '';
