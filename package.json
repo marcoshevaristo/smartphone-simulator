@@ -1,0 +1,46 @@
+{
+  "name": "smartphone-simulator",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --configuration production",
+    "build-prod": "ng build --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^15.1.0",
+    "@angular/cdk": "^15.2.5",
+    "@angular/common": "^15.1.0",
+    "@angular/compiler": "^15.1.0",
+    "@angular/core": "^15.1.0",
+    "@angular/forms": "^15.1.0",
+    "@angular/material": "^15.2.5",
+    "@angular/platform-browser": "^15.1.0",
+    "@angular/platform-browser-dynamic": "^15.1.0",
+    "@angular/router": "^15.1.0",
+    "ngx-loading": "^15.0.0",
+    "rxjs": "^7.5.5",
+    "swiper": "^9.2.0",
+    "tslib": "^2.4.0",
+    "uuid": "^9.0.0",
+    "zone.js": "~0.11.5"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^15.1.1",
+    "@angular-devkit/schematics": "^15.1.1",
+    "@angular/cli": "^15.1.1",
+    "@angular/compiler-cli": "^15.1.0",
+    "@types/node": "^16.11.35",
+    "ts-node": "^10.7.0",
+    "tslint": "~6.1.0",
+    "typescript": "~4.9.4"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120
+  }
+}

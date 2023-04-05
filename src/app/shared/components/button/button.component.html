@@ -1,0 +1,4 @@
+<button class="button {{ variant }}" type="button" [disabled]="disabled" (click)="!disabled && clickEvent($event)">
+  <em *ngIf="icon" [class]="icon"></em>
+  {{ label }}
+</button>

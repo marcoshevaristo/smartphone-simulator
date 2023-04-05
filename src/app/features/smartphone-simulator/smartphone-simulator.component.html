@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="simulator">
+    <div>
+      <swiper-container slides-per-view="1" space-between="20">
+        <swiper-slide *ngFor="let page of pageCountArray">
+          <div class="apps-wrapper">
+            <app-app-card
+              [app]="app"
+              (onClickApp)="onClickApp($event)"
+              (onClickEdit)="onEditApp($event)"
+              (onClickRemove)="onRemoveApp($event)"
+              *ngFor="let app of apps | slice : getPageStartingIndex(page) : getPageStartingIndex(page) + pageSize"
+            ></app-app-card>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+    <div class="pagination">
+      <span
+        class="page-item"
+        [ngClass]="{ 'page-selected': currentPage === page }"
+        *ngFor="let page of pageCountArray; let index = index"
+      ></span>
+    </div>
+  </div>
+</div>
+<div class="form-container">
+  <app-app-form></app-app-form>
+</div>
+
+<app-dialog *ngIf="displayContactModal">
+  <ng-template #header>
+    <h2>Contact info</h2>
+  </ng-template>
+  <ng-template #content>
+    <p>{{ selectedApp.contactInfo }}</p> </ng-template
+  >o
+  <ng-template #footer>
+    <app-button variant="delete" label="Close" (onClick)="closeContactModal()"></app-button>
+  </ng-template>
+</app-dialog>
+
+<app-dialog *ngIf="displayEditionModal">
+  <ng-template #header>
+    <h2>Editing app {{ selectedApp.name }}</h2>
+  </ng-template>
+  <ng-template #content>
+    <app-app-form
+      [edit]="true"
+      [formValue]="selectedApp"
+      (afterSave)="closeEditingModal()"
+      (onCancel)="closeEditingModal()"
+    ></app-app-form>
+  </ng-template>
+</app-dialog>
+
+<app-dialog *ngIf="displayConfirmRemovalModal">
+  <ng-template #header>
+    <h2>Removing app {{ selectedApp.name }}</h2>
+  </ng-template>
+  <ng-template #content>
+    <p>Do you confirm the removal of this app?</p>
+  </ng-template>
+  <ng-template #footer>
+    <app-button variant="delete" label="Cancel" (onClick)="closeConfirmRemovalModal()"></app-button>
+    <app-button label="Confirm" (onClick)="confirmRemoval()"></app-button>
+  </ng-template>
+</app-dialog>

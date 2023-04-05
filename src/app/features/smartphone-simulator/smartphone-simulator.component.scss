@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .simulator {
+    width: 70%;
+    background-color: var(--gray-25);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    .apps-wrapper {
+      min-height: 350px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 15px;
+      height: 100%;
+      padding: 15px;
+
+      @media (max-width: 767px) {
+        gap: 10px;
+      }
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 50px;
+
+      .page-item {
+        width: 5px;
+        height: 5px;
+        background-color: var(--gray-50);
+        border-radius: 10px;
+        transition: width ease-in-out 200ms, height ease-in-out 200ms;
+
+        &.page-selected {
+          width: 8px;
+          height: 8px;
+          background-color: var(--theme-25);
+        }
+      }
+    }
+  }
+}
+
+.form-container {
+  margin-top: 15px;
+  padding-bottom: 15px;
+}

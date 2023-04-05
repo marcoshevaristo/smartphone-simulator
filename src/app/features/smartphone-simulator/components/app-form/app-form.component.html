@@ -1,0 +1,10 @@
+<div class="container">
+  <app-text-field label="Card name" [(model)]="formValue.name"></app-text-field>
+  <app-text-field label="Version" [(model)]="formValue.version"></app-text-field>
+  <app-text-field label="Contact" [(model)]="formValue.contactInfo"></app-text-field>
+
+  <div class="button-container">
+    <app-button *ngIf="edit" label="Cancel" variant="delete" (onClick)="cancel()"></app-button>
+    <app-button label="Save card" (onClick)="submit()"></app-button>
+  </div>
+</div>

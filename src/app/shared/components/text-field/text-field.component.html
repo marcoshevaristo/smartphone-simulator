@@ -1,0 +1,4 @@
+<div class="container">
+  <label class="label">{{ label }}</label>
+  <input class="input-field" type="text" [ngModel]="model" (ngModelChange)="modelChange.emit($event)" />
+</div>
