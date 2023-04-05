@@ -1,6 +1,17 @@
 <div class="container" (click)="appClick()">
-  <app-button class="edit-button" (onClick)="edit()" icon="fa-regular fa-pen-to-square"></app-button>
-  <app-button class="remove-button" (onClick)="remove()" icon="fa-regular fa-x" variant="delete"></app-button>
+  <app-button
+    class="edit-button"
+    (onClick)="edit()"
+    icon="fa-regular fa-pen-to-square"
+    [responsive]="true"
+  ></app-button>
+  <app-button
+    class="remove-button"
+    (onClick)="remove()"
+    icon="fa-regular fa-x"
+    variant="delete"
+    [responsive]="true"
+  ></app-button>
   <span class="app-name">{{ app.name }}</span>
   <span class="app-version">{{ app.version }}</span>
 </div>

@@ -10,7 +10,34 @@ export class SmartphoneSimulatorService {
   constructor(private storageService: StorageService) {
     const savedApps: App[] = storageService.get('apps');
     const apps = savedApps.length ? savedApps : initialApps;
+    this.storageService.set('apps', apps);
     this.smartphoneApps$.next(apps);
+  }
+
+  public addApp(app: App) {
+    const currentAppList = this.smartphoneApps$.value;
+    const newList = [...currentAppList, { ...app }];
+    this.storageService.set('apps', newList);
+    this.smartphoneApps$.next([...currentAppList, { ...app }]);
+  }
+
+  public saveApp(app: App) {
+    let currentAppList = this.smartphoneApps$.value;
+    currentAppList = currentAppList.map((appItem) => {
+      if (appItem.id === app.id) {
+        appItem = { ...app };
+      }
+      return appItem;
+    });
+
+    this.storageService.set('apps', currentAppList);
+    this.smartphoneApps$.next([...currentAppList]);
+  }
+
+  public removeApp(app: App) {
+    const newList = this.smartphoneApps$.value.filter((item) => item.id !== app.id);
+    this.storageService.set('apps', newList);
+    this.smartphoneApps$.next(newList);
   }
 }
 

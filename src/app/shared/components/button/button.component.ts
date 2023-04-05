@@ -16,6 +16,8 @@ export class ButtonComponent {
   public disabled = false;
   @Input()
   public variant: ButtonVariant = 'default';
+  @Input()
+  public responsive = false;
 
   @Output()
   public onClick = new EventEmitter<MouseEvent>();

@@ -8,7 +8,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
-  imports: [CoreModule, AppRoutingModule, SharedModule, BrowserAnimationsModule, NgxLoadingModule.forRoot({})],
+  imports: [
+    CoreModule,
+    AppRoutingModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    NgxLoadingModule.forRoot({ fullScreenBackdrop: true }),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

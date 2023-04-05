@@ -20,6 +20,10 @@
     position: absolute;
     right: 40px;
     top: 5px;
+
+    @media (max-width: 767px) {
+      right: 30px;
+    }
   }
 
   .remove-button {

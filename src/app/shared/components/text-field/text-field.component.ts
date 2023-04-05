@@ -14,6 +14,8 @@ export class TextFieldComponent {
   public numeric = false;
   @Input()
   public regex: RegExp;
+  @Input()
+  public error: string;
   @Output()
   public modelChange = new EventEmitter<string>();
 }

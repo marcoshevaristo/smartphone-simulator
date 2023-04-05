@@ -17,6 +17,8 @@ export class AppFormComponent {
   @Output()
   public onCancel = new EventEmitter<void>();
 
+  public errors: Partial<App> = {};
+
   public readonly semanticVersionRegex =
     /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
 
@@ -24,18 +26,10 @@ export class AppFormComponent {
 
   submit() {
     if (this._isFormValid()) {
-      let currentAppList = this.smartphoneSimulatorService.smartphoneApps$.value;
       if (this.edit) {
-        currentAppList = currentAppList.map((app) => {
-          if (app.id === this.formValue.id) {
-            app = { ...this.formValue };
-          }
-          return app;
-        });
-
-        this.smartphoneSimulatorService.smartphoneApps$.next([...currentAppList]);
+        this.smartphoneSimulatorService.saveApp(this.formValue);
       } else {
-        this.smartphoneSimulatorService.smartphoneApps$.next([...currentAppList, { ...this.formValue }]);
+        this.smartphoneSimulatorService.addApp(this.formValue);
       }
       this.afterSave.emit();
       this.formValue = new App();
@@ -47,7 +41,18 @@ export class AppFormComponent {
   }
 
   private _isFormValid() {
+    const currentAppList = this.smartphoneSimulatorService.smartphoneApps$.value;
     const { name, version, contactInfo } = this.formValue;
-    return name && contactInfo && version.match(this.semanticVersionRegex);
+    this.errors.name = !name ? 'Name is required' : '';
+    if (!this.errors.name && currentAppList.some((item) => item.name.toUpperCase() === name.toUpperCase())) {
+      this.errors.name = currentAppList.some((item) => item.name.toUpperCase() === name.toUpperCase())
+        ? 'Name is already in the list'
+        : '';
+    }
+    this.errors.version = !version?.match(this.semanticVersionRegex)
+      ? 'Version must follow the semantic versioning pattern, e.g: X.XX.XX'
+      : '';
+    this.errors.contactInfo = !contactInfo ? 'Contact is required' : '';
+    return !Object.values(this.errors).some((error) => error);
   }
 }

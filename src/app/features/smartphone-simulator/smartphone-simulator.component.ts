@@ -64,12 +64,14 @@ export class SmartphoneSimulatorComponent implements OnInit, OnDestroy, AfterVie
   }
 
   ngAfterViewInit(): void {
-    register();
+    setTimeout(() => {
+      register();
 
-    const swiperEl = document.querySelector('swiper-container');
-    swiperEl.addEventListener('slidechange', (event: any) => {
-      this.currentPage = event.detail[0].snapIndex;
-    });
+      const swiperEl = document.querySelector('swiper-container') as any;
+      swiperEl.addEventListener('slidechange', (event: any) => {
+        this.currentPage = event.detail[0].snapIndex;
+      });
+    }, 1000);
   }
 
   getPageStartingIndex(pageNumber: number) {
@@ -102,9 +104,7 @@ export class SmartphoneSimulatorComponent implements OnInit, OnDestroy, AfterVie
   }
 
   confirmRemoval() {
-    this.smartphoneSimulatorService.smartphoneApps$.next(
-      this.smartphoneSimulatorService.smartphoneApps$.value.filter((item) => item.id !== this.selectedApp.id)
-    );
+    this.smartphoneSimulatorService.removeApp(this.selectedApp);
     this.displayConfirmRemovalModal = false;
     this.selectedApp = undefined;
   }
